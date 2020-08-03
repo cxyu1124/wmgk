@@ -1,15 +1,20 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-import Vue from 'vue'
-import App from './App'
-import router from './router'
+import createApp from './create-main'
+import bus from '@/utils/bus'
+// import toast from './utils/toast'
 
-Vue.config.productionTip = false
+const { router, app } = createApp()
 
-/* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  router,
-  components: { App },
-  template: '<App/>'
+let hasLogin = false
+bus.$on('auth', () => {
+  if (!hasLogin) {
+    // toast.showMsg('请先登录', 'w')
+    router.replace('/web')
+    hasLogin = true
+  }
 })
+
+router.onReady(() => {
+  app.$mount('#app')
+})
+
+export default app

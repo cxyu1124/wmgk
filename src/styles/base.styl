@@ -1,0 +1,39 @@
+*
+  box-sizing border-box
+
+body, html
+  margin 0
+  padding 0
+  height 100%
+  font-size 14px
+  font-family Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun, sans-serif
+  font-weight 400
+  text-align left
+  -webkit-font-smoothing antialiased
+  -webkit-tap-highlight-color transparent
+
+a
+  color #606266
+  cursor pointer
+  transition all 0.3s
+  text-decoration none
+
+.flex-wrapper
+  display -webkit-box
+  display -ms-flexbox
+  display flex
+
+ellipsis($levels)
+  for $level in $levels
+    &.ellipsis-{$level}
+      display -webkit-box
+      overflow hidden
+      text-overflow ellipsis
+      word-wrap break-word
+      word-break break-all
+      white-space normal !important
+      -webkit-box-orient vertical
+      -webkit-line-clamp $level
+      max-height 23px * $level
+
+ellipsis(1 2 3)

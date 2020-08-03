@@ -1,13 +1,42 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+  <div id="app"
+    v-wechat-title="$route.meta.title"
+  >
+    <!-- <img src="./assets/logo.png"> -->
+    <transition
+      mode="out-in"
+      name="dialog-fade"
+    >
+      <router-view/>
+    </transition>
   </div>
 </template>
 
 <script>
+const baseSize = 100 
+
+// 设置 rem 函数
+function setRem () {
+  // 当前页面宽度相对于 750 宽的缩放比例，可根据自己需要修改。
+  const scale = document.documentElement.clientWidth / 1366
+  // 设置页面根节点字体大小
+  document.documentElement.style.fontSize = (baseSize * Math.min(scale, 2)) + 'px'
+}
+// 初始化
+setRem()
+// 改变窗口大小时重新设置 rem
+window.onresize = function () {
+  setRem()
+}
+
 export default {
-  name: 'App'
+  name: 'app-component',
+  data () {
+    return {
+
+    }
+  },
+  mounted () {}
 }
 </script>
 
@@ -16,8 +45,7 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  text-align: left;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
